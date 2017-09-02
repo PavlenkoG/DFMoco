@@ -1,15 +1,12 @@
 /**
   ******************************************************************************
-  * File Name          : main.h
-  * Description        : This file contains the common defines of the application
+  * @file    stm32f0xx_hal_spi_ex.h
+  * @author  MCD Application Team
+  * @brief   Header file of SPI HAL Extended module.
   ******************************************************************************
-  ** This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
+  * @attention
   *
-  * COPYRIGHT(c) 2017 STMicroelectronics
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -35,45 +32,60 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MAIN_H
-#define __MAIN_H
-  /* Includes ------------------------------------------------------------------*/
+#ifndef __STM32F0xx_HAL_SPI_EX_H
+#define __STM32F0xx_HAL_SPI_EX_H
 
-/* USER CODE BEGIN Includes */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* USER CODE END Includes */
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f0xx_hal_def.h"
 
-/* Private define ------------------------------------------------------------*/
+/** @addtogroup STM32F0xx_HAL_Driver
+  * @{
+  */
 
-#define B1_Pin GPIO_PIN_13
-#define B1_GPIO_Port GPIOC
-#define USART_TX_Pin GPIO_PIN_2
-#define USART_TX_GPIO_Port GPIOA
-#define USART_RX_Pin GPIO_PIN_3
-#define USART_RX_GPIO_Port GPIOA
-#define LD2_Pin GPIO_PIN_5
-#define LD2_GPIO_Port GPIOA
-#define TMS_Pin GPIO_PIN_13
-#define TMS_GPIO_Port GPIOA
-#define TCK_Pin GPIO_PIN_14
-#define TCK_GPIO_Port GPIOA
+/** @addtogroup SPIEx
+  * @{
+  */
 
-/* USER CODE BEGIN Private defines */
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
+/** @addtogroup SPIEx_Exported_Functions
+  * @{
+  */
 
-/* USER CODE END Private defines */
-
-//void _Error_Handler(char *, int);
-
-//#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
+/* Initialization and de-initialization functions  ****************************/
+/* IO operation functions *****************************************************/
+/** @addtogroup SPIEx_Exported_Functions_Group1
+  * @{
+  */
+HAL_StatusTypeDef HAL_SPIEx_FlushRxFifo(SPI_HandleTypeDef *hspi);
+/**
+  * @}
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-*/ 
+  */
 
-#endif /* __MAIN_H */
+/**
+  * @}
+  */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM32F0xx_HAL_SPI_EX_H */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
