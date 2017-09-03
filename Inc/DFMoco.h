@@ -1,3 +1,5 @@
+#include "stm32f0xx_hal.h"
+
 #define DFMOCO_VERSION 1
 #define DFMOCO_VERSION_STRING "1.2.7"
 #define MOTOR_COUNT 1
@@ -16,7 +18,7 @@
 #define CMD_GET_SPEED			81
 #define CMD_GET_MARK 			82
 #define CMD_GET_MAXSPEED	83
-#define CMD_GET_MINSPEED	84
+#define CMD_GET_MINSPEED    84
 #define CMD_GET_POSITION	85
 #define CMD_GO_HOME				86
 #define CMD_GO_MARK				87
@@ -76,7 +78,6 @@
 #define CMD_JM         70 // jog motor
 #define CMD_IM         71 // inch motor
 
-
 #define MSG_HI 01
 #define MSG_MM 02
 #define MSG_MP 03
@@ -89,7 +90,6 @@
 #define MSG_JM 12
 #define MSG_IM 13
 
-
 #define MSG_STATE_START 0
 #define MSG_STATE_CMD   1
 #define MSG_STATE_DATA  2
@@ -98,10 +98,10 @@
 
 #define P2P_MOVE_COUNT 7
 
-struct UserCmd processUserMessage (uint8_t *RxBuffer, uint8_t len);
+struct UserCmd processUserMessage(uint8_t *RxBuffer, uint8_t len);
 void processSerialCommand(struct UserCmd);
-void sendMessage (char *data_to_send, uint16_t len);
-void processMessage (uint8_t MSG);
+void sendMessage(char *data_to_send, uint16_t len);
+void processMessage(uint8_t MSG);
 void setupMotorMove(int motorIndex, int32_t destination);
 uint8_t isValidMotor(int motorIndex);
 void processGoPosition(int motorIndex, int32_t pos);

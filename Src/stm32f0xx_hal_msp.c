@@ -37,16 +37,9 @@
 #include "l6474.h"
 #include "stm32f0xx_nucleo_ihm01a1.h"
 #include <stm32_hal_legacy.h>
-extern DMA_HandleTypeDef hdma_usart2_tx;
 extern void BSP_MotorControl_StepClockHandler(uint8_t deviceId); 
 extern void BSP_MotorControl_FlagInterruptHandler(void);
-/* USER CODE BEGIN 0 */
 
-/* USER CODE END 0 */
-
-/**
-  * Initializes the Global MSP.
-  */
 void HAL_MspInit(void)
 {
   /* USER CODE BEGIN MspInit 0 */
@@ -87,28 +80,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     GPIO_InitStruct.Alternate = GPIO_AF1_USART2;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /* Peripheral DMA init*/
-  
-//    hdma_usart2_tx.Instance = DMA1_Channel2;
-//    hdma_usart2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
-//    hdma_usart2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
-//    hdma_usart2_tx.Init.MemInc = DMA_MINC_DISABLE;
-//    hdma_usart2_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-//    hdma_usart2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-//    hdma_usart2_tx.Init.Mode = DMA_NORMAL;
-//    hdma_usart2_tx.Init.Priority = DMA_PRIORITY_LOW;
-//    HAL_DMA_Init(&hdma_usart2_tx);
-//
-//    __HAL_DMA1_REMAP(HAL_DMA1_CH2_USART2_TX);
-//
-//    __HAL_LINKDMA(huart,hdmatx,hdma_usart2_tx);
 
   /* Peripheral interrupt init*/
     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
-  /* USER CODE BEGIN USART2_MspInit 1 */
-
-  /* USER CODE END USART2_MspInit 1 */
   }
 
 }
@@ -143,7 +118,6 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
 }
 
-/* USER CODE BEGIN 1 */
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;

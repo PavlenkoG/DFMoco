@@ -38,8 +38,8 @@ int msgState;
 int32_t msgNumberSign;
 
 extern UART_HandleTypeDef huart2;
-extern TIM_HandleTypeDef htimer2;
-extern TIM_HandleTypeDef htimer16;
+//extern TIM_HandleTypeDef htimer2;
+//extern TIM_HandleTypeDef htimer16;
 
 char ok_command[] = "hi 1 1 1.2.7 \r\n";
 char err_comand[] = "command error \r\n";
@@ -248,6 +248,7 @@ void processSerialCommand(struct UserCmd userCmd) {
             else
                 BSP_MotorControl_Run(0, 1);
             processMessage(MSG_JM);
+            break;
         case CMD_GETSTAT:
             processMessage(MSG_GETSTAT);
             break;
@@ -380,8 +381,7 @@ void processMessage(uint8_t MSG) {
         break;
     case MSG_GOTODIR:
         int32_active = 1;
-        param_32t_c_len = sprintf(parameter_c, "Motor is moving to %d\r\n",
-                userCmd.args[3]);
+        param_32t_c_len = sprintf(parameter_c, "Motor is moving to %d\r\n", userCmd.args[3]);
         break;
     case MSG_SOFTSTOP:
         int32_active = 0;
@@ -390,46 +390,39 @@ void processMessage(uint8_t MSG) {
     case MSG_GET_ACCEL:
         int32_active = 0;
         param_16t = BSP_MotorControl_GetAcceleration(0);
-        param_16t_c_len = sprintf(parameter_c, "Motor Acceleration = %d\r\n",
-                param_16t);
+        param_16t_c_len = sprintf(parameter_c, "Motor Acceleration = %d\r\n", param_16t);
         break;
     case MSG_GET_DECCEL:
         int32_active = 0;
         param_16t = BSP_MotorControl_GetDeceleration(0);
-        param_16t_c_len = sprintf(parameter_c, "Motor Deceleration = %d\r\n",
-                param_16t);
+        param_16t_c_len = sprintf(parameter_c, "Motor Deceleration = %d\r\n", param_16t);
         break;
     case MSG_GET_SPEED:
         int32_active = 0;
         param_16t = BSP_MotorControl_GetCurrentSpeed(0);
-        param_16t_c_len = sprintf(parameter_c, "Motor Current Speed = %d\r\n",
-                param_16t);
+        param_16t_c_len = sprintf(parameter_c, "Motor Current Speed = %d\r\n", param_16t);
         break;
     case MSG_GET_MARK:
         int32_active = 1;
         param_32t = BSP_MotorControl_GetMark(0);
-        param_32t_c_len = sprintf(parameter_c, "Mark = %d\r\n",
-                userCmd.args[3]);
+        param_32t_c_len = sprintf(parameter_c, "Mark = %d\r\n", userCmd.args[3]);
         break;
     case MSG_GET_MAXSPEED:
         int32_active = 0;
         param_16t = BSP_MotorControl_GetMaxSpeed(0);
-        param_16t_c_len = sprintf(parameter_c, "Motor max speed = %d\r\n",
-                param_16t);
+        param_16t_c_len = sprintf(parameter_c, "Motor max speed = %d\r\n", param_16t);
         break;
     case MSG_GET_MINSPEED:
         int32_active = 0;
         param_16t = BSP_MotorControl_GetMinSpeed(0);
-        param_16t_c_len = sprintf(parameter_c, "Motor min speed = %d\r\n",
-                param_16t);
+        param_16t_c_len = sprintf(parameter_c, "Motor min speed = %d\r\n", param_16t);
         break;
     case MSG_GET_POSITION:
         int32_active = 1;
         param_32t = BSP_MotorControl_GetPosition(0);
         if (userCmd.args[0] == 0)
             userCmd.args[0] = 1;
-        param_32t_c_len = sprintf(parameter_c, "mp %d %d\r\n", userCmd.args[0],
-                param_32t);
+        param_32t_c_len = sprintf(parameter_c, "mp %d %d\r\n", userCmd.args[0], param_32t);
         //param_32t_c_len = sprintf(parameter_c, "Current Position = %d\r\n",param_32t);
         break;
     case MSG_GO_HOME:
@@ -438,8 +431,7 @@ void processMessage(uint8_t MSG) {
         break;
     case MSG_GO_MARK:
         int32_active = 0;
-        param_16t_c_len = sprintf(parameter_c,
-                "Motor is going to home position\r\n");
+        param_16t_c_len = sprintf(parameter_c, "Motor is going to home position\r\n");
         break;
     case MSG_GOTO:
         int32_active = 1;
@@ -453,15 +445,11 @@ void processMessage(uint8_t MSG) {
         break;
     case MSG_MOVE:
         int32_active = 1;
-        param_16t_c_len = sprintf(parameter_c,
-                "Motor is moving in directoin %d for %d steps\r\n",
-                userCmd.args[0], userCmd.args[1]);
+        param_16t_c_len = sprintf(parameter_c, "Motor is moving in directoin %d for %d steps\r\n", userCmd.args[0], userCmd.args[1]);
         break;
     case MSG_RUN:
         int32_active = 0;
-        param_16t_c_len = sprintf(parameter_c,
-                "Motor is running to direction %d\r\n",
-                (uint16_t) userCmd.args[0]);
+        param_16t_c_len = sprintf(parameter_c, "Motor is running to direction %d\r\n", (uint16_t) userCmd.args[0]);
         break;
         /*		case MSG_SETACCEL	:
          int32_active = 0;
@@ -473,13 +461,11 @@ void processMessage(uint8_t MSG) {
          break;*/
     case MSG_SETHOME:
         int32_active = 0;
-        param_16t_c_len = sprintf(parameter_c,
-                "Current position is set as HOME\r\n");
+        param_16t_c_len = sprintf(parameter_c, "Current position is set as HOME\r\n");
         break;
     case MSG_SETMARK:
         int32_active = 0;
-        param_16t_c_len = sprintf(parameter_c,
-                "Current position is marked\r\n");
+        param_16t_c_len = sprintf(parameter_c, "Current position is marked\r\n");
         break;
 
     }
